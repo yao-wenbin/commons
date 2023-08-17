@@ -5,10 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * @Author yaowenbin
- * @Date 2023/8/17
- */
 public class ListBuilder<T> {
 
     public static final int INITIAL_SIZE = 16;

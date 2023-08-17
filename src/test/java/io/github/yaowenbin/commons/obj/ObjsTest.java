@@ -9,8 +9,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
- * @Author yaowenbin
- * @Date 2023/7/3
+ *  
+ *  
  */
 public class ObjsTest {
     Person person;

@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * @Author yaowenbin
- * @Date 2023/8/17
+ *  
+ *  
  */
 class ListBuilderTest extends UnitTest {
 

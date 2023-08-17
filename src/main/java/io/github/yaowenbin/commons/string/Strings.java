@@ -1,8 +1,8 @@
 package io.github.yaowenbin.commons.string;
 
 /**
- * @Author yaowenbin
- * @Date 2023/8/17
+ *  
+ *  
  */
 public class Strings {
 
