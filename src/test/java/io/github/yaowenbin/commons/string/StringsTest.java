@@ -4,11 +4,12 @@ import io.github.yaowenbin.commons.UnitTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-/**
- *  
- *  
- */
 class StringsTest extends UnitTest {
+
+    @Test
+    void EMPTY_shouldNotNull() {
+        assertThat(Strings.EMPTY).isNotNull();
+    }
 
     @Test
     void isEmpty() {
@@ -68,9 +69,15 @@ class StringsTest extends UnitTest {
     @Test
     @Disabled
     void format() {
-        String str = "you are {}";
-        String param1 = "pig";
-
+        String str = "{} are pig";
+        String param1 = "you";
         assertThat(Strings.format(str, param1)).isEqualTo("you are pig");
+
+        String template2 = "{} are {}";
+        String param2 = "pig";
+        assertThat(Strings.format(template2, param1, param2)).isEqualTo("you are pig");
+
+        String template3_withNoPlaceHolder = "you are pig";
+        assertThat(Strings.format(template3_withNoPlaceHolder, param1, param2)).isEqualTo("you are pig");
     }
 }

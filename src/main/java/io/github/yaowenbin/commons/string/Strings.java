@@ -1,12 +1,12 @@
 package io.github.yaowenbin.commons.string;
 
-/**
- *  
- *  
- */
+import io.github.yaowenbin.commons.list.Arrays;
+
 public class Strings {
 
     private Strings() {}
+
+    public static final String EMPTY = "";
 
     public static boolean isEmpty(String str) {
         return str == null || str.equals("");
@@ -26,8 +26,35 @@ public class Strings {
 
 
     // TODO
-    public static String format(String template, String... params) {
+    public static String format(String template, Object... params) {
+        if (Strings.isBlank(template) || Arrays.isEmpty(params)) {
+            return template;
+        }
 
-        return template;
+        String placeHolder = "{}";
+        int placeHolderLen = placeHolder.length();
+        StringBuilder sb = new StringBuilder();
+        int templateLen = template.length();
+        int handlePos = 0;
+        for (int i = 0; i < params.length; i++) {
+            int placeHolderIndex = template.indexOf(placeHolder, handlePos);
+            if (placeHolderIndex == -1) {
+                // no placeholder in template.
+                if (handlePos == 0) {
+                    return template;
+                } else {
+                // no more placeholder in template, just append rest of template and return.
+                    sb.append(template, handlePos, templateLen);
+                    return sb.toString();
+                }
+            }
+            // append chars before placeHolderIndex
+            sb.append(template, handlePos, placeHolderIndex);
+            sb.append(params[i].toString());
+            handlePos = placeHolderIndex + placeHolderLen;
+        }
+        // handle rest strings.
+        sb.append(template, handlePos, templateLen);
+        return sb.toString();
     }
 }
