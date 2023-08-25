@@ -1,10 +1,6 @@
 package io.github.yaowenbin.commons.map;
 
 
-/**
- *  
- *  
- */
 public class Maps {
 
     private Maps() {}

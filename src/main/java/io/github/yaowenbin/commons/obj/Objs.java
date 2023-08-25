@@ -4,10 +4,6 @@ import io.github.yaowenbin.commons.string.Strings;
 
 import java.util.function.Supplier;
 
-/**
- *  
- *  
- */
 public class Objs {
 
 

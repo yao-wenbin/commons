@@ -6,10 +6,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- *  
- *  
- */
 public class MapBuilder<K, V> {
 
     public static final int INITIAL_SIZE = 16;

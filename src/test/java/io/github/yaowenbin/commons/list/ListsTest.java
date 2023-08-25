@@ -9,10 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- *  
- *  
- */
 class ListsTest extends UnitTest {
 
     @Test

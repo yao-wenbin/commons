@@ -8,10 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-/**
- *  
- *  
- */
 public class ObjsTest {
     Person person;
 

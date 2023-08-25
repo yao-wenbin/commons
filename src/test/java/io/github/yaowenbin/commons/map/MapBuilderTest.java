@@ -8,10 +8,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- *  
- *  
- */
 class MapBuilderTest extends UnitTest {
 
     MapBuilder<String, Object> builder = new MapBuilder<String, Object>().put("key", "value");

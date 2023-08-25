@@ -7,10 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- *  
- *  
- */
 class ListBuilderTest extends UnitTest {
 
     ListBuilder<String> builder = new ListBuilder<>();
