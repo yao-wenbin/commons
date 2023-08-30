@@ -35,7 +35,6 @@ class ReflectsTest extends UnitTest {
 class SimpleBean {
 
     void getter() {
-        return;
     }
 
 }
