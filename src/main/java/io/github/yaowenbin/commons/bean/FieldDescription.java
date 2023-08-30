@@ -1,6 +1,6 @@
 package io.github.yaowenbin.commons.bean;
 
-import io.github.yaowenbin.commons.obj.Objs;
+import io.github.yaowenbin.commons.asserts.Asserts;
 import io.github.yaowenbin.commons.reflect.Reflects;
 
 import java.lang.reflect.Field;
@@ -16,7 +16,7 @@ public class FieldDescription {
     Method setter;
 
     public FieldDescription(Field field, Method getter, Method setter) {
-        Objs.assertNotNull(field, "field should not be null");
+        Asserts.notNull(field, "field should not be null");
         this.field = field;
         this.getter = getter;
         this.setter = setter;
