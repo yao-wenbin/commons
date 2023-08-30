@@ -1,14 +1,15 @@
 package io.github.yaowenbin.commons.obj;
 
+import io.github.yaowenbin.commons.UnitTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ObjsTest {
+public class ObjsTest extends UnitTest {
     Person person;
 
     @BeforeEach
@@ -50,6 +51,22 @@ public class ObjsTest {
         Object result = Objs.getOrDefault(person.id(), () -> person.no());
 
         verify(person, times(0)).no();
+    }
+
+    @Test
+    public void assertNotNull_shouldThrowNPE_whenObjectIsNull() {
+        NullPointerException npe = assertThrows(NullPointerException.class, () -> {
+            Objs.assertNotNull(null, "not null Ok?");
+        });
+
+        assertThat(npe).hasMessage("not null Ok?");
+    }
+
+    @Test
+    public void assertNotNull_shouldDoNothing_whenObjectIsNotNUll() {
+        assertDoesNotThrow(() -> {
+            Objs.assertNotNull(new Person());
+        });
     }
 }
 

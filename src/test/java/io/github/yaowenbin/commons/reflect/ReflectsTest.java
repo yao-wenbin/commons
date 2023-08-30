@@ -30,11 +30,38 @@ class ReflectsTest extends UnitTest {
         assertThat(timer.interval()).isLessThanOrEqualTo(inaccessibleInterval);
     }
 
+    @Test
+    void isPublic_shouldReturnTrue_whenMethodIsPublic() throws NoSuchMethodException {
+        Method getter = SimpleBean.class.getDeclaredMethod("getter");
+        assertThat(Reflects.isPublic(getter)).isFalse();
+
+        Method privateGetter = SimpleBean.class.getDeclaredMethod("privateGetter");
+        assertThat(Reflects.isPublic(privateGetter)).isFalse();
+
+        Method protectedGetter = SimpleBean.class.getDeclaredMethod("protectedGetter");
+        assertThat(Reflects.isPublic(protectedGetter)).isFalse();
+
+        Method publicGetter = SimpleBean.class.getDeclaredMethod("publicGetter");
+        assertThat(Reflects.isPublic(publicGetter)).isTrue();
+    }
+
 }
 
 class SimpleBean {
 
     void getter() {
+    }
+
+    public void publicGetter() {
+
+    }
+
+    private void privateGetter() {
+
+    }
+
+    protected void protectedGetter() {
+
     }
 
 }

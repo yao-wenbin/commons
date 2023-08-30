@@ -41,4 +41,22 @@ public class Objs {
         return Strings.isBlank(val) ? defaultSupplier.get() : val;
     }
 
+    public static void assertNotNull(Object obj) {
+        if (obj == null) {
+            throw new NullPointerException();
+        }
+    }
+
+    public static void assertNotNull(Object obj, String msg) {
+        if (obj == null) {
+            throw new NullPointerException(msg);
+        }
+    }
+
+    public static void assertNotNull(Object obj, String msg, Object... msgParams) {
+        if (obj == null) {
+            throw new NullPointerException(Strings.format(msg, msgParams));
+        }
+    }
+
 }

@@ -17,4 +17,14 @@ public class Reflects {
         }
         method.setAccessible(true);
     }
+
+    /**
+     * check access modifier of method is public.
+     * protected | private | public
+     * 4         | 2       | 1
+     * @param method
+     */
+    public static boolean isPublic(Method method) {
+        return (method.getModifiers() & 1) == 1;
+    }
 }
