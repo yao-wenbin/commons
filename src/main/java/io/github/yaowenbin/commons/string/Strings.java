@@ -57,4 +57,11 @@ public class Strings {
         sb.append(template, handlePos, templateLen);
         return sb.toString();
     }
+
+    public static String upperFirstChar(String fieldName) {
+        if (Strings.isBlank(fieldName)) {
+            return fieldName;
+        }
+        return fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+    }
 }

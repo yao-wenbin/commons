@@ -1,7 +1,6 @@
 package io.github.yaowenbin.commons.string;
 
 import io.github.yaowenbin.commons.UnitTest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class StringsTest extends UnitTest {
@@ -67,7 +66,6 @@ class StringsTest extends UnitTest {
     }
 
     @Test
-    @Disabled
     void format() {
         String str = "{} are pig";
         String param1 = "you";
@@ -79,5 +77,11 @@ class StringsTest extends UnitTest {
 
         String template3_withNoPlaceHolder = "you are pig";
         assertThat(Strings.format(template3_withNoPlaceHolder, param1, param2)).isEqualTo("you are pig");
+    }
+
+    @Test
+    void upperFirstChar() {
+        assertThat(Strings.upperFirstChar("youGet")).isEqualTo("YouGet");
+        assertThat(Strings.upperFirstChar("")).isEqualTo("");
     }
 }

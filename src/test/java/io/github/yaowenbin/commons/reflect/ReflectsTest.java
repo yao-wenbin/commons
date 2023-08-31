@@ -2,10 +2,13 @@ package io.github.yaowenbin.commons.reflect;
 
 import io.github.yaowenbin.commons.UnitTest;
 import io.github.yaowenbin.commons.datetime.Timer;
+import io.github.yaowenbin.commons.list.Lists;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 class ReflectsTest extends UnitTest {
 
@@ -45,23 +48,108 @@ class ReflectsTest extends UnitTest {
         assertThat(Reflects.isPublic(publicGetter)).isTrue();
     }
 
+    @Test
+    void getMethods() {
+        List<Object> res = Lists.builder().add("publicGetter").add("subGetter").build();
+
+        Method[] methods = Reflects.getPublicMethods(SubBean.class);
+
+        assertThat(methods).allMatch(method -> res.contains(method.getName()));
+    }
+
+    @Test
+    void getMethodsWithSuppers() {
+        List<Object> res = Lists.builder().add("publicGetter").add("subGetter").build();
+
+        Method[] methods = Reflects.getPublicMethods(SubBean.class, true);
+
+        // check same name method will only return one.
+        assertThat(methods).hasSize(2);
+        assertThat(methods).allMatch(method -> res.contains(method.getName()));
+    }
+
+    @Test
+    void fields() {
+        Field[] fields = Reflects.fields(SubBean.class);
+        assertThat(fields).hasSize(7);
+    }
+
+    @Test
+    void invoke_getter() throws NoSuchMethodException {
+        SimpleBean bean = new SimpleBean();
+        bean.publicField = "foo";
+        Method publicGetter = SimpleBean.class.getDeclaredMethod("publicGetter");
+
+        Object result = Reflects.invoke(bean, publicGetter);
+
+        assertThat(result).isEqualTo("foo");
+    }
+
+    @Test
+    void invoke_setter() throws NoSuchMethodException {
+        SimpleBean bean = new SimpleBean();
+
+        Method setter = SimpleBean.class.getDeclaredMethod("publicSetter", String.class);
+        Reflects.invoke(bean, setter, "bar");
+
+        assertThat(bean.publicField).isEqualTo("bar");
+    }
+
+    @Test
+    void newInstance() {
+        SimpleBean res = Reflects.newInstance(SimpleBean.class);
+        assertThat(res).isNotNull();
+
+        OneConstructorBean oneConstructorBean = Reflects.newInstance(OneConstructorBean.class);
+        assertThat(oneConstructorBean).isNotNull();
+    }
+
 }
 
 class SimpleBean {
 
+    public String publicField;
+    protected String protectedField;
+    private String privateField;
+    String defaultField;
+
     void getter() {
     }
 
-    public void publicGetter() {
-
+    public String publicGetter() {
+        return publicField;
     }
 
-    private void privateGetter() {
-
+    private String privateGetter() {
+        return privateField;
     }
 
-    protected void protectedGetter() {
-
+    protected String protectedGetter() {
+        return publicField;
     }
 
+    public void publicSetter(String publicField) {
+        this.publicField = publicField;
+    }
+
+}
+
+class OneConstructorBean {
+
+    private String field;
+
+    public OneConstructorBean(String field) {
+        this.field = field;
+    }
+}
+
+class SubBean extends SimpleBean {
+    // to mock test case class and supper class have same name field.
+    public String publicField;
+    protected String subProtectedField;
+    private String subPrivateField;
+    public void subGetter() {}
+    public String publicGetter() {
+        return publicField;
+    }
 }

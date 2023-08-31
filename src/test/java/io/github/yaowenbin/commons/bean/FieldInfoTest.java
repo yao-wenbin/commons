@@ -7,69 +7,69 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-class FieldDescriptionTest extends UnitTest {
+class FieldInfoTest extends UnitTest {
 
     @Test
     void construction_shouldThrowNpe_whenFieldIsNull() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            new FieldDescription(null, null, null);
+            new FieldInfo(null, null, null);
         });
     }
 
     @Test
     void isReadable_shouldReturnFalse_whenFieldGetterIsNull() throws NoSuchFieldException, NoSuchMethodException {
-        Field field1 = Bean.class.getDeclaredField("field1");
-        FieldDescription fd = new FieldDescription(field1, null, null);
+        Field field1 = FieldInfoTestBean.class.getDeclaredField("field1");
+        FieldInfo fd = new FieldInfo(field1, null, null);
         assertThat(fd.isReadable()).isFalse();
 
-        Method getter = Bean.class.getDeclaredMethod("getField1");
-        fd = new FieldDescription(null, getter, null);
+        Method getter = FieldInfoTestBean.class.getDeclaredMethod("getField1");
+        fd = new FieldInfo(null, getter, null);
         assertThat(fd.isReadable()).isFalse();
     }
 
     @Test
     void isReadable_shouldTrue_whenGetterIsPublic() throws NoSuchMethodException, NoSuchFieldException {
-        Field id = Bean.class.getDeclaredField("field1");
-        Method getter = Bean.class.getDeclaredMethod("getField1");
+        Field id = FieldInfoTestBean.class.getDeclaredField("field1");
+        Method getter = FieldInfoTestBean.class.getDeclaredMethod("getField1");
 
-        FieldDescription result = new FieldDescription(id, getter, null);
+        FieldInfo result = new FieldInfo(id, getter, null);
 
         assertThat(result.isReadable()).isTrue();
     }
 
     @Test
     void isReadable_shouldFalse_whenGetterIsNonPublic() throws NoSuchMethodException, NoSuchFieldException {
-        Field id = Bean.class.getDeclaredField("field2");
-        Method getter = Bean.class.getDeclaredMethod("getField2");
+        Field id = FieldInfoTestBean.class.getDeclaredField("field2");
+        Method getter = FieldInfoTestBean.class.getDeclaredMethod("getField2");
 
-        FieldDescription result = new FieldDescription(id, getter, null);
+        FieldInfo result = new FieldInfo(id, getter, null);
 
         assertThat(result.isReadable()).isFalse();
     }
 
     @Test
     void isWriteable_shouldTrue_whenSetterIsPublic() throws NoSuchFieldException, NoSuchMethodException {
-        Field id = Bean.class.getDeclaredField("field1");
-        Method setter = Bean.class.getDeclaredMethod("setField1", String.class);
+        Field id = FieldInfoTestBean.class.getDeclaredField("field1");
+        Method setter = FieldInfoTestBean.class.getDeclaredMethod("setField1", String.class);
 
-        FieldDescription result = new FieldDescription(id, null, setter);
+        FieldInfo result = new FieldInfo(id, null, setter);
 
         assertThat(result.isWriteable()).isTrue();
     }
 
     @Test
     void isWriteable_shouldFalse_whenSetterIsNotPublic() throws NoSuchFieldException, NoSuchMethodException {
-        Field id = Bean.class.getDeclaredField("field2");
-        Method setter = Bean.class.getDeclaredMethod("setField2", Long.class);
+        Field id = FieldInfoTestBean.class.getDeclaredField("field2");
+        Method setter = FieldInfoTestBean.class.getDeclaredMethod("setField2", Long.class);
 
-        FieldDescription result = new FieldDescription(id, null, setter);
+        FieldInfo result = new FieldInfo(id, null, setter);
 
         assertThat(result.isWriteable()).isFalse();
     }
 
 }
 
-class Bean {
+class FieldInfoTestBean {
 
     private String field1;
 
