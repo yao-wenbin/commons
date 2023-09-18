@@ -36,5 +36,25 @@ public class Files {
         return java.nio.file.Files.newInputStream(path, options);
     }
 
+    public static OutputStream newOutPutStream(Path path, OpenOption... options) throws IOException {
+        return java.nio.file.Files.newOutputStream(path, options);
+    }
 
+    public static Path createFile(Path filePath) throws IOException {
+        return java.nio.file.Files.createFile(filePath);
+    }
+
+    public static Path writeString(Path path, String s) throws IOException {
+        return java.nio.file.Files.write(path, s.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public static FileWatcher watch(Path filePath, FileWatcher.Listener listener) {
+        return watch(filePath, listener, 500 /* 0.5s */);
+    }
+
+    public static FileWatcher watch(Path filePath, FileWatcher.Listener listener , long interval) {
+        FileWatcher fileWatcher = new FileWatcher(filePath, listener, interval);
+        fileWatcher.start();
+        return fileWatcher;
+    }
 }
