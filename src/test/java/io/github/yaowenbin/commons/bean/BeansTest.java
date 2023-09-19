@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -40,8 +41,14 @@ class BeansTest extends UnitTest {
 
     @Test
     void toMap() {
+        Person person = new Person(1, 2L, "foo");
 
+        Map<String, Object> res = Beans.toMap(person);
 
+        assertThat(res).isInstanceOf(HashMap.class);
+        assertThat(res.get("id")).isEqualTo(1);
+        assertThat(res.get("no")).isEqualTo(2L);
+        assertThat(res.get("username")).isEqualTo("foo");
     }
 
 

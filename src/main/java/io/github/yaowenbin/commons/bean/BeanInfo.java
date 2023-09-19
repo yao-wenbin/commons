@@ -36,6 +36,14 @@ public class BeanInfo {
         return fieldMap;
     }
 
+    public Map<String, FieldInfo> readableFieldMap() {
+        Map<String, FieldInfo> res = new HashMap<>(fieldMap.size());
+        fieldMap.entrySet().stream().filter(entry -> entry.getValue().isReadable()).forEach(entry -> {
+            res.put(entry.getKey(), entry.getValue());
+        });
+        return res;
+    }
+
     public FieldInfo getField(String fieldName) {
         return fieldMap.get(fieldName);
     }
