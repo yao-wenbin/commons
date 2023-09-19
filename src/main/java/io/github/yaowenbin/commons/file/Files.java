@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class Files {
 
@@ -55,6 +56,8 @@ public class Files {
     public static FileWatcher watch(Path filePath, FileWatcher.Listener listener , long interval) {
         FileWatcher fileWatcher = new FileWatcher(filePath, listener, interval);
         fileWatcher.start();
+        int[] arr = new int[]{};
+        Arrays.asList(arr);
         return fileWatcher;
     }
 }

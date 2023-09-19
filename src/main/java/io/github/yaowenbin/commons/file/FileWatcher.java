@@ -1,6 +1,5 @@
 package io.github.yaowenbin.commons.file;
 
-import com.sun.istack.internal.NotNull;
 import io.github.yaowenbin.commons.concurrency.Scheduler;
 import io.github.yaowenbin.commons.map.Pair;
 
@@ -16,7 +15,7 @@ public class FileWatcher extends Scheduler {
 
     private Thread thread;
 
-    public FileWatcher(@NotNull Path path, Listener listener, long interval) {
+    public FileWatcher(Path path, Listener listener, long interval) {
         this.pair = new Pair<>(path, path.toFile().lastModified());
         this.listener = listener;
         this.interval = interval;
@@ -30,7 +29,9 @@ public class FileWatcher extends Scheduler {
 
     private void checkFilePath() {
         Path path = pair.key();
-        if (pair.val() != path.toFile().lastModified()) {
+        long lastModified = path.toFile().lastModified();
+        if (pair.val() != lastModified) {
+            pair.setVal(lastModified);
             listener.onChange(path);
         }
     }
