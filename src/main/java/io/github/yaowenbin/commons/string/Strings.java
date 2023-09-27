@@ -2,6 +2,8 @@ package io.github.yaowenbin.commons.string;
 
 import io.github.yaowenbin.commons.list.Arrays;
 
+import java.util.Locale;
+
 public class Strings {
 
     private Strings() {}
@@ -22,6 +24,10 @@ public class Strings {
 
     public static boolean notBlank(String str) {
         return !isBlank(str);
+    }
+
+    public static boolean equalsIgnoreCase(String str1, String str2) {
+        return str1.toLowerCase(Locale.ROOT).equals(str2.toLowerCase(Locale.ROOT));
     }
 
 
