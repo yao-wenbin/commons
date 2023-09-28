@@ -53,7 +53,7 @@ public class FileWatcher extends Scheduler {
     }
 
     public boolean stopped() {
-        return false;
+        return !started();
     }
 
     public interface Listener {

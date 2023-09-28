@@ -9,7 +9,7 @@ import java.util.Map;
 public class Beans {
 
     public static <T> T fromMap(Map<String, Object> fromMap, Class<T> clz) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
 

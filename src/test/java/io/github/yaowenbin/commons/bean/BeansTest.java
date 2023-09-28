@@ -3,12 +3,13 @@ package io.github.yaowenbin.commons.bean;
 import io.github.yaowenbin.commons.Person;
 import io.github.yaowenbin.commons.UnitTest;
 import io.github.yaowenbin.commons.map.Maps;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @Author yaowenbin
@@ -53,27 +54,28 @@ class BeansTest extends UnitTest {
 
 
     @Test
-    @Disabled
     void fromMap() {
         Date now = new Date();
         Map<String, Object> fromMap = Maps.<String, Object>builder().put("id", 1).put("no", 123L).put("name", "zhangsan").put("createTime", now).build();
 
-        Person person = Beans.fromMap(fromMap, Person.class);
+        assertThrows(UnsupportedOperationException.class, () -> {
+            Person person = Beans.fromMap(fromMap, Person.class);
 
-        assertThat(person.id()).isEqualTo(1);
-        assertThat(person.no()).isEqualTo(123L);
-        assertThat(person.username()).isEqualTo("zhangsan");
-        assertThat(person.createTime()).isEqualTo(now);
+            assertThat(person.id()).isEqualTo(1);
+            assertThat(person.no()).isEqualTo(123L);
+            assertThat(person.username()).isEqualTo("zhangsan");
+            assertThat(person.createTime()).isEqualTo(now);
 
-        fromMap.put("id", null);
-        fromMap.put("createTime", null);
+            fromMap.put("id", null);
+            fromMap.put("createTime", null);
 
-        person = Beans.fromMap(fromMap, Person.class);
+            person = Beans.fromMap(fromMap, Person.class);
 
-        assertThat(person.id()).isEqualTo(null);
-        assertThat(person.no()).isEqualTo(123L);
-        assertThat(person.username()).isEqualTo("zhangsan");
-        assertThat(person.createTime()).isEqualTo((Date)null);
+            assertThat(person.id()).isEqualTo(null);
+            assertThat(person.no()).isEqualTo(123L);
+            assertThat(person.username()).isEqualTo("zhangsan");
+            assertThat(person.createTime()).isEqualTo((Date)null);
+        });
     }
 
     private BeanTestBean mockBean() {
