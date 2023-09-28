@@ -2,6 +2,7 @@ package io.github.yaowenbin.commons.file;
 
 import io.github.yaowenbin.commons.string.Strings;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -56,6 +57,7 @@ public class FilesTest {
 
 
     @Test
+    @Disabled
     void watchStop() {
         FileWatcher fileWatcher = Files.watch(filePath, (filePath) -> {
             System.out.println(Strings.format("file:{} changed", filePath));

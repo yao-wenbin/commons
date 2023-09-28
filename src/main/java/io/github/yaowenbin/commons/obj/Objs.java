@@ -29,13 +29,20 @@ public class Objs {
 
     /**
      * 同{@link Objs#getOrDefault(Object, Object)} 但以StrUtil.isEmpty判空
+     * @param val val need to assert
+     * @param def default val
+     * @return if val is blank or null return default val. or just val.
      */
     public static String getOrDefault(String val, String def) {
         return Strings.isBlank(val) ? def : val;
     }
 
+
     /**
-     * 同{@link Objs#getOrDefault(Object, Supplier)} 但以StrUtil.isEmpty判空
+     * 同{@link Objs#getOrDefault(Object, Supplier)} Strings.isBlank判空
+     * @param val val need to assert
+     * @param defaultSupplier default val supplier
+     * @return if val is blank or null return default val supplier result. or just val.
      */
     public static String getOrDefault(String val, Supplier<String> defaultSupplier) {
         return Strings.isBlank(val) ? defaultSupplier.get() : val;

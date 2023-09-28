@@ -20,7 +20,7 @@ public class Reflects {
      * reminder: accessible of Method and Field in java.lang.reflect package doesn't mean a method or field whether access.
      *   instead, it's means JVM whether exec type-safe check.
      *   so set accessible to true will skip the type-safe check that will increase performance.
-     * @param method
+     * @param method method set to accessible.
      */
     public static void setAccessible(Method method) {
         if (method == null || method.isAccessible()) {
@@ -33,7 +33,8 @@ public class Reflects {
      * check access modifier of method is public.
      * protected | private | public
      * 4         | 2       | 1
-     * @param method
+     * @param method method to check if public.
+     * @return if method has public modifier.
      */
     public static boolean isPublic(Method method) {
         return (method.getModifiers() & 1) == 1;
@@ -44,10 +45,12 @@ public class Reflects {
     }
 
     /**
-     * @return methods contains
      * 1. any access modifier in clz.
      * 2. any public methods in clz supper.
      * same method name will return the one closet for clz.
+     * @param clz class
+     * @param withSuppers if result need contain supper class public methods.
+     * @return methods contains
      */
     public static Method[] getPublicMethods(Class<?> clz, boolean withSuppers) {
         Asserts.notNull(clz, "clz should not be null.");

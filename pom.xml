@@ -83,6 +83,15 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+            </plugin>
+        </plugins>
+    </build>
+
     <!-- for deploy the maven central repository   -->
     <profiles>
         <profile>
@@ -116,6 +125,9 @@
                                 </goals>
                             </execution>
                         </executions>
+                        <!--<configuration>-->
+                        <!--    <additionalparam>-Xdoclint:none</additionalparam>-->
+                        <!--</configuration>-->
                     </plugin>
                     <!-- GPG -->
                     <plugin>
@@ -130,10 +142,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
                     </plugin>
                 </plugins>
             </build>

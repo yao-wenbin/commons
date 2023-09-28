@@ -6,20 +6,20 @@ import io.github.yaowenbin.commons.reflect.Reflects;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @Author yaowenbin
- * @Date 2023/8/28
- */
 public class Beans {
-
 
     public static <T> T fromMap(Map<String, Object> fromMap, Class<T> clz) {
         return null;
     }
 
+
     /**
      * to align the common BeanUtil#copyProperties.
-     * @param <T> BeanType
+     * @param source copy property source
+     * @param target copy property target
+     * @return target with source's properties
+     * @param <T> Target Type.
+     * @param <S> Source Type.
      */
     public static <T, S> T copyProperties(S source, T target) {
         Asserts.notNull(source, "source should not be null");
@@ -47,12 +47,25 @@ public class Beans {
         return target;
     }
 
-
+    /**
+     * to align the common BeanUtil#copyProperties.
+     * @param source copy property source
+     * @param targetClass Target Class.
+     * @return target class instance with source's properties
+     * @param <T> Target Type.
+     * @param <S> Source Type.
+     */
     public static <T, S> T copyProperties(S source, Class<T> targetClass) {
         T target = Reflects.newInstance(targetClass);
         return copyProperties(source, target);
     }
 
+    /**
+     * convert a instance into map.
+     * @param source instance
+     * @return HashMap contains all source's property.
+     * @param <T> Source Type.
+     */
     public static <T> Map<String, Object> toMap(T source) {
         Class<?> sourceClz = source.getClass();
 

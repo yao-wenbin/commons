@@ -80,7 +80,7 @@ class ListsTest extends UnitTest {
     void map_shouldFilterNullVal () {
         List<Object> list = Lists.builder().add(null).add(null).build();
 
-        Lists.map(list, Object::toString);
+        list = Lists.map(list, Object::toString);
 
         assertThat(list).hasSize(0);
     }

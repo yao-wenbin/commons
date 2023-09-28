@@ -1,9 +1,5 @@
 package io.github.yaowenbin.commons.datetime;
 
-/**
- * @Author yaowenbin
- * @Date 2023/8/28
- */
 public class Timer {
 
     private long startTimestamp = System.currentTimeMillis();

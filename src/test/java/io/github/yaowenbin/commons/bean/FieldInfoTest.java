@@ -22,8 +22,9 @@ class FieldInfoTest extends UnitTest {
         FieldInfo fd = new FieldInfo(field1, null, null);
         assertThat(fd.isReadable()).isFalse();
 
-        Method getter = FieldInfoTestBean.class.getDeclaredMethod("getField1");
-        fd = new FieldInfo(null, getter, null);
+        Field field2 = FieldInfoTestBean.class.getDeclaredField("field2");
+        Method getter = FieldInfoTestBean.class.getDeclaredMethod("getField2");
+        fd = new FieldInfo(field2, getter, null);
         assertThat(fd.isReadable()).isFalse();
     }
 
