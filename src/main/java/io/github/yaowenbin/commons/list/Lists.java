@@ -1,7 +1,9 @@
 package io.github.yaowenbin.commons.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -43,4 +45,35 @@ public class Lists {
     }
 
 
+    /**
+     * add multi element into a ArrayList.
+     * @param elements single or multi object.
+     * @return ArrayList containers all elements.
+     * @param <T> element type.
+     */
+    public static <T> List<T> of(T... elements) {
+        return Arrays.stream(elements).collect(Collectors.toList());
+    }
+
+    /**
+     * add multi element into a ArrayList.
+     * @param elements single or multi object.
+     * @return ArrayList containers all elements.
+     * @param <T> element type.
+     */
+    public static <T> List<T> unmodifiedOf(T... elements) {
+        return Collections.unmodifiableList(of(elements));
+    }
+
+    public static <T> List<T> unmodifiedOf(List<T> elementList) {
+        return Collections.unmodifiableList(elementList);
+    }
+
+    /**
+     * @return unmodified empty List
+     * @param <T> list generic type.
+     */
+    public static <T> List<T> empty() {
+        return Collections.emptyList();
+    }
 }

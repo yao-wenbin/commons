@@ -9,6 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 class ListsTest extends UnitTest {
 
     @Test
@@ -99,5 +102,58 @@ class ListsTest extends UnitTest {
         assertThat(idList).element(0).isEqualTo(1);
     }
 
+    @Test
+    void of () {
+        Person person = new Person(1, 9999L, "foo");
+        Person person2 = new Person(2, 10000L, "bar");
+
+        List<Person> result = Lists.of(person, person2);
+        assertThat(result).hasSize(2);
+        assertThat(result).isInstanceOf(ArrayList.class);
+
+        assertDoesNotThrow(() -> {
+            result.add(new Person());
+        });
+    }
+
+    @Test
+    void of_CollectionParam() {
+
+    }
+
+    @Test
+    void unmodifiedOf() {
+        Person person = new Person(1, 9999L, "foo");
+        Person person2 = new Person(2, 10000L, "bar");
+
+        List<Person> unmodified = Lists.unmodifiedOf(person, person2);
+        assertThat(unmodified).hasSize(2);
+
+        assertThrows(UnsupportedOperationException.class, () -> {
+            unmodified.add(new Person());
+        });
+    }
+
+    @Test
+    void unmodifiedOf_listTypeParam() {
+        List<Person> persons = Lists.of(new Person(1, 9999L, "foo"), new Person(2, 10000L, "bar"));
+
+        List<Person> unmodified = Lists.unmodifiedOf(persons);
+        assertThat(unmodified).hasSize(2);
+
+        assertThrows(UnsupportedOperationException.class, () -> {
+            unmodified.add(new Person());
+        });
+    }
+
+    @Test
+    void empty() {
+        List<Object> empty = Lists.empty();
+
+        assertThat(empty).hasSize(0);
+        assertThrows(UnsupportedOperationException.class, () -> {
+            empty.add(new Person());
+        });
+    }
 
 }
