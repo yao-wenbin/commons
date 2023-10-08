@@ -28,6 +28,7 @@ public class Files {
      * overwrite file of path's content with str.
      * @param path file path.
      * @param content content need to write in file.
+     * @throws IOException cannot write file.
      */
     public static void write(Path path, String content) throws IOException {
         write(path.toFile(), content);
